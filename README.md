@@ -9,36 +9,22 @@ Q# QuickReach - Shortest Path Finder 🛰️🗺️
 
 ## Overview
 
-**QuickReach** is a modern web application developed for **students of IIT Guwahati** to find the **shortest path between two nodes** in a graph. The application features a professional dark-bluish interface, interactive zoomable maps, and displays detailed path information.
+*QuickReach* is a modern web application developed for *students of IIT Guwahati* to *navigate the campus efficiently. By selecting a source and destination, students can find the **shortest path on the IIT Guwahati campus map*, along with detailed distance and path information.
 
-It’s designed for:
-- IIT Guwahati students learning graph algorithms
-- Educational demonstrations
-- Interactive map-based visualization
+It is designed for:
+- New and current students navigating IIT Guwahati campus  
+- Quick visualization of shortest walking routes  
+- Educational and practical demonstration of campus navigation  
 
 ---
 
 ## Features
 
-- **Interactive zoomable and draggable maps** using `react-zoom-pan-pinch`
-- **Dynamic shortest path fetching** from Flask API with Axios
-- Clean, responsive **React + TailwindCSS UI**
-- Displays **source, destination, path sequence, and total distance**
-- Smooth hover and focus effects with professional dark theme
-
----
-
-## Screenshots
-
-### Home Page
-![Home](./public/screenshot_home.png)
-
-### Zoomable Maps
-![Maps](./public/screenshot_maps.png)
-
-### Path Output
-![Path](./public/screenshot_path.png)
-
+- *Interactive zoomable and draggable campus maps* using react-zoom-pan-pinch  
+- *Dynamic shortest path fetching* from Flask API  
+- Displays *source, destination, path sequence, and total distance*  
+- Professional dark-bluish theme with smooth UI/UX  
+- Fully responsive and mobile-friendly
 ---
 
 ## Tech Stack
