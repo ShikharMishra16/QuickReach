@@ -18,6 +18,10 @@ It is designed for:
 
 ---
 
+## Demo
+ https://drive.google.com/file/d/1jnUzbTnIThRkZZ_5x93VQeK6ouRwXHMb/view?usp=drive_link
+---
+
 ## Features
 
 - *Interactive zoomable and draggable campus maps* using react-zoom-pan-pinch  
