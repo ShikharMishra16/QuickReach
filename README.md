@@ -45,9 +45,9 @@ It is designed for:
 
 ### 2. Run the client
 
-  `cd viteclient
-   npm install
-    npm run dev `
+  `-cd viteclient
+   -npm install
+    -npm run dev `
 
 ### 3. Run the server
 
