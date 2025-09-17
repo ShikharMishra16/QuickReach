@@ -39,5 +39,13 @@ It is designed for:
 ## Installation & Setup
 
 ### 1. Clone the repo
-```bash
-git clone https://github.com/<your-username>/QuickReach.git
+  ```git clone https://github.com/ShikharMishra16/QuickReach.git```
+
+
+### 2. Run the client
+  ```cd viteclient```
+  ```npm install```
+  ```npm run dev```
+
+###3. Run the server
+   ```python server.py```
