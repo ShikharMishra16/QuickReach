@@ -19,7 +19,7 @@ It is designed for:
 ---
 
 ## Demo
-[[Link-](https://drive.google.com/file/d/1jnUzbTnIThRkZZ_5x93VQeK6ouRwXHMb/view?usp=drive_link)]
+[Click Here For Demo Video(https://drive.google.com/file/d/1jnUzbTnIThRkZZ_5x93VQeK6ouRwXHMb/view?usp=drive_link)]
 
 ---
 
