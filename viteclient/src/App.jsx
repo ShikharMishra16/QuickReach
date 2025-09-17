@@ -1,6 +1,30 @@
 import React, { useState } from "react";
 import { fetchShortData } from "./callServer";
 import Routes from "./routes";
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+
+const ZoomableImage = ({ src, alt }) => {
+  return (
+    <div className="bg-gray-800/60 rounded-2xl flex flex-col items-center justify-center shadow-xl backdrop-blur-md border border-gray-700 hover:border-indigo-500 transition overflow-hidden p-4">
+      <TransformWrapper
+        initialScale={1}
+        minScale={1}
+        maxScale={3}
+        wheel={{ step: 0.1 }}
+        doubleClick={{ disabled: true }}
+        pinch={{ step: 5 }}
+      >
+        <TransformComponent>
+          <img
+            src={src}
+            alt={alt}
+            className="w-full h-auto object-contain rounded-lg cursor-grab"
+          />
+        </TransformComponent>
+      </TransformWrapper>
+    </div>
+  );
+};
 
 const App = () => {
   const [data, setData] = useState(null);
@@ -24,22 +48,15 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 flex flex-col items-center p-8">
-      
       <header className="text-4xl font-extrabold text-indigo-400 mb-10 tracking-wide drop-shadow-lg">
         QuickReach <span className="text-indigo-300">- Shortest Path Finder</span>
       </header>
 
-     
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl mb-12">
-        <div className="bg-gray-800/60 rounded-2xl h-72 flex items-center justify-center shadow-xl backdrop-blur-md border border-gray-700 hover:border-indigo-500 transition">
-          <span className="text-gray-400">🛰️ Satellite Map (Coming Soon)</span>
-        </div>
-        <div className="bg-gray-800/60 rounded-2xl h-72 flex items-center justify-center shadow-xl backdrop-blur-md border border-gray-700 hover:border-indigo-500 transition">
-          <span className="text-gray-400">🗺️ Output Map (Coming Soon)</span>
-        </div>
+        <ZoomableImage src="/satMap.png" alt="Satellite Map" />
+        <ZoomableImage src="/outlineMap.png" alt="Output Map" />
       </div>
 
-      
       <form
         onSubmit={onsubmitHandler}
         className="bg-gray-800/70 shadow-2xl rounded-2xl p-8 w-full max-w-lg space-y-6 border border-gray-700 hover:border-indigo-500 transition"
@@ -84,7 +101,6 @@ const App = () => {
         </button>
       </form>
 
-      
       <div className="w-full max-w-4xl mt-12">
         {display && data && (
           <div className="bg-gray-800/70 rounded-2xl p-6 shadow-xl border border-gray-700">
