@@ -1,35 +1,99 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import { fetchShortData } from "./callServer";
+import Routes from "./routes";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [data, setData] = useState(null);
+  const [display, setDisplay] = useState(false);
+
+  const onsubmitHandler = async (e) => {
+    e.preventDefault();
+    const a = e.target.source.value;
+    const b = e.target.destination.value;
+
+    try {
+      const jsonData = await fetchShortData(a, b);
+      setData(jsonData);
+      setDisplay(true);
+    } catch (error) {
+      console.error("Error in submit:", error);
+    }
+
+    e.target.reset();
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 flex flex-col items-center p-8">
+      
+      <header className="text-4xl font-extrabold text-indigo-400 mb-10 tracking-wide drop-shadow-lg">
+        QuickReach <span className="text-indigo-300">- Shortest Path Finder</span>
+      </header>
 
-export default App
+     
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl mb-12">
+        <div className="bg-gray-800/60 rounded-2xl h-72 flex items-center justify-center shadow-xl backdrop-blur-md border border-gray-700 hover:border-indigo-500 transition">
+          <span className="text-gray-400">🛰️ Satellite Map (Coming Soon)</span>
+        </div>
+        <div className="bg-gray-800/60 rounded-2xl h-72 flex items-center justify-center shadow-xl backdrop-blur-md border border-gray-700 hover:border-indigo-500 transition">
+          <span className="text-gray-400">🗺️ Output Map (Coming Soon)</span>
+        </div>
+      </div>
+
+      
+      <form
+        onSubmit={onsubmitHandler}
+        className="bg-gray-800/70 shadow-2xl rounded-2xl p-8 w-full max-w-lg space-y-6 border border-gray-700 hover:border-indigo-500 transition"
+      >
+        <div>
+          <label htmlFor="source" className="block text-indigo-300 font-semibold mb-2">
+            Source
+          </label>
+          <input
+            id="source"
+            name="source"
+            type="number"
+            min={1}
+            max={64}
+            placeholder="Enter Source"
+            required
+            className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="destination" className="block text-indigo-300 font-semibold mb-2">
+            Destination
+          </label>
+          <input
+            id="destination"
+            name="destination"
+            type="number"
+            min={1}
+            max={64}
+            placeholder="Enter Destination"
+            required
+            className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-gray-100 placeholder-gray-500 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-indigo-600 text-white py-3 rounded-lg font-semibold hover:bg-indigo-700 transition duration-300 shadow-lg hover:shadow-indigo-500/40"
+        >
+          Find Path
+        </button>
+      </form>
+
+      
+      <div className="w-full max-w-4xl mt-12">
+        {display && data && (
+          <div className="bg-gray-800/70 rounded-2xl p-6 shadow-xl border border-gray-700">
+            <Routes dataPoint={data} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default App;
