@@ -1,4 +1,4 @@
-Q# QuickReach - Shortest Path Finder 🛰️🗺️
+# QuickReach - Shortest Path Finder 
 
 [![React](https://img.shields.io/badge/React-18.2.0-blue?logo=react)](https://reactjs.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.3.2-blue?logo=tailwind-css)](https://tailwindcss.com/)
