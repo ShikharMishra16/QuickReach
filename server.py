@@ -1,24 +1,90 @@
 import sys
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from collections import defaultdict
 from heapq import heappush, heappop
-from flask import Flask, request, jsonify, send_from_directory
+from flask import Flask, jsonify
 
 app = Flask(__name__, static_folder='viteclient/build', static_url_path='')
-cors = CORS(app)
-
 cors = CORS(app, origins=['http://localhost:5173'])
 
+# Node number → location name (FILL THESE MANUALLY)
+node_names = {
+    1: "IITG Main Gate", 
+    2: "Market Complex Junc.", 
+    3: "D Type Entrance", 
+    4: "Serpentine Lake", 
+    5: "F Type Junc.", 
+    6: "New Guesthouse", 
+    7: "Hospital Bus Stop", 
+    8: "IITG Hospital", 
+    9: "Turn Between IITG Hospital And Married Scholar Hostel",  
+    10: "Bridge infront Of Married Scholar's Hostel",
+    11: "Married Scholar hostel", 
+    12: "Dhansiri Hostel", 
+    13: "New Sac", 
+    14: "Swimming Pool/Athletics Field", 
+    15: "Sac-Gym Junction", 
+    16: "Bridge to Kameng/Gaurang", 
+    17: "Kameng Hostel", 
+    18: "Manas Hostel", 
+    19: "Bridge to Umiam/Barak", 
+    20: "Barak/Umiam Hostel",
+    21: "Domino's/Brahmaputra Hostel Junction", 
+    22: "Khoka Gate", 
+    23: "Domino's", 
+    24: "Dihing Hostel", 
+    25: "Turn to Brahmaputra Hostel Entrance", 
+    26: "Brahmaputra Hostel Gate", 
+    27: "Dibang/Kapili Main Gate", 
+    28: "T-point Ahead Of Kapili/Dibang", 
+    29: "Kapili Bus Stand", 
+    30: "Turn To Siang Hostel Maingate",
+    31: "Siang Main Gate", 
+    32: "Old-Sac-Tennis Court Junction", 
+    33: "Old Sac", 
+    34: "Tennis Court", 
+    35: "Subansiri Bus Stand", 
+    36: "Subansiri Hostel", 
+    37: "Old GuestHouse Bus Stand", 
+    38: "Conference Hall/D Type Junction", 
+    39: "ViewPoint Entrance", 
+    40: "Auditorium",
+    41: "Admin Building", 
+    42: "Junction Near CCC/Cycle Shop", 
+    43: "Junction Near Cycle Shop/Tapri", 
+    44: "Library/CCC", 
+    45: "ATMs/Souvenier Shops", 
+    46: "Lecture Halls", 
+    47: "Core 1 Front", 
+    48: "Start of Outside Road Around Core 1-4", 
+    49: "Core 1/Mech Hill Junction", 
+    50: "Mechanical Workshop",
+    51: "Classroom Complex", 
+    52: "Core 2/ Core 3 Junction(Core 5 side)", 
+    53: "Core 2", 
+    54: "Core 3", 
+    55: "Hashtag Cafe", 
+    56: "Earthquake Resistant Building", 
+    57: "Core 4/KV gate Junction", 
+    58: "Core 4 Parking(Dept. Of Civil Engg.)", 
+    59: "Core 4", 
+    60: "Core 4 Parking(Dept. of Physics)",
+    61: "Core 4 Extension ", 
+    62: "Turn to Research Building", 
+    63: "Library/CCC Junction", 
+    64: "KV Gate", 
+    65: ""  
+}
 
 @app.route('/')
 def hello_world():
     return 'Landing!'
 
-
 @app.route('/shortd/<int:a>/<int:b>')
 def shortestPath(a, b):
-    src = a
-    dst = b
+    src, dst = a, b
+
+    # Graph definition
     graph = {
         1: {2: 262},
         2: {1: 262, 3: 330, 39: 262},
@@ -55,7 +121,6 @@ def shortestPath(a, b):
         33: {34: 60},
         34: {33: 60},
         35: {32: 130, 36: 130, 40: 130, 38: 262},
-        35: {32: 130, 36: 130, 40: 130, 38: 262},
         36: {35: 130, 37: 400},
         38: {35: 262, 39: 330, 49: 380},
         39: {38: 330, 2: 262},
@@ -71,12 +136,13 @@ def shortestPath(a, b):
         49: {38: 380, 50: 91, 47: 100},
         50: {49: 91, 52: 182},
         51: {52: 40},
-        52: {53: 130, 54: 130, 51: 40},
+        52: {53: 130, 54: 130, 51: 40, 62: 200},
         53: {52: 130, 54: 20, 55: 130},
         54: {53: 20, 52: 130, 55: 130},
         55: {48: 250, 56: 122, 53: 130, 54: 130},
         56: {55: 122, 57: 115},
         57: {56: 115, 58: 130, 64: 250},
+        58: {57: 130, 59: 66, 60: 66},
         59: {58: 66, 60: 66},
         60: {58: 66, 61: 66},
         61: {60: 50, 62: 30},
@@ -84,6 +150,8 @@ def shortestPath(a, b):
         63: {48: 66, 43: 105},
         64: {57: 250, 28: 460, 22: 716}
     }
+
+    # Build adjacency list
     g = defaultdict(list)
     for u in graph:
         for v, wt in graph[u].items():
@@ -91,43 +159,43 @@ def shortestPath(a, b):
             g[v].append([u, wt])
 
     inf = float('inf')
-    n = 65  # Assuming n is the number of nodes in the graph
-    distance = [inf] * (1 + n)
+    n = 65
+    distance = [inf] * (n + 1)
     distance[src] = 0
-    smallest = []
-    heappush(smallest, [distance[src], src])
-    path = [-1] * (1 + n)
+    path = [-1] * (n + 1)
 
-    # Dijkstra's algorithm
-    while smallest:
-        dis, node = heappop(smallest)
+    pq = []
+    heappush(pq, [0, src])
+
+    while pq:
+        dis, node = heappop(pq)
         if dis > distance[node]:
             continue
         for neigh, cost in g[node]:
             if dis + cost < distance[neigh]:
                 path[neigh] = node
                 distance[neigh] = dis + cost
-                heappush(smallest, [distance[neigh], neigh])
+                heappush(pq, [distance[neigh], neigh])
 
     if distance[dst] == inf:
-        return [-1]
-    netdis = distance[dst]
-    res = []
+        return jsonify({"error": "No path found"})
+
+    # Reconstruct path
     current = dst
-    ans = []
+    path_nodes = []
     while current > 0:
-        ans.append(current)
+        path_nodes.append(current)
         current = path[current]
-    res.append(ans[::-1])
-    res.append(netdis)
+    path_nodes.reverse()
+
+    # Build result with names
     result = {
-        "from": src,
-        "to": dst,
-        "path": res[0],
-        "totalDis": res[1]
+        "from": node_names.get(src, f"Node {src}"),
+        "to": node_names.get(dst, f"Node {dst}"),
+        "path": [node_names.get(n, f"Node {n}") for n in path_nodes],
+        "totalDis": distance[dst]
     }
     return jsonify(result)
-
 
 if __name__ == "__main__":
     app.run(debug=True)
