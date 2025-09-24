@@ -6,8 +6,13 @@
 [![Flask](https://img.shields.io/badge/Flask-2.3.3-lightgrey?logo=flask)](https://flask.palletsprojects.com/)
 
 ---
-## Dployment
+## Deployment
   [Deployed App](https://quickreachdeploy.vercel.app/)
+
+---
+
+## Demo
+[Click Here For Demo Video](https://drive.google.com/file/d/1d4FgO9HrA2sJobwYxfkEWla3DZuah-ob/view?usp=sharing)
 
 ---
 
@@ -19,11 +24,6 @@ It is designed for:
 - New and current students navigating IIT Guwahati campus  
 - Quick visualization of shortest walking routes  
 - Educational and practical demonstration of campus navigation  
-
----
-
-## Demo
-[Click Here For Demo Video](https://drive.google.com/file/d/1d4FgO9HrA2sJobwYxfkEWla3DZuah-ob/view?usp=sharing)
 
 ---
 
