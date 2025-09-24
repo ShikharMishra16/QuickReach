@@ -3,9 +3,13 @@ from flask_cors import CORS
 from collections import defaultdict
 from heapq import heappush, heappop
 from flask import Flask, jsonify
+allowed_origins = [
+    "http://localhost:5173",                 
+    "https://quickreachdeploy.vercel.app"    
+]
 
 app = Flask(__name__, static_folder='viteclient/build', static_url_path='')
-cors = CORS(app, origins=['http://localhost:5173'])
+cors = CORS(app, origin=allowed_origins)
 
 # Node number → location name (FILL THESE MANUALLY)
 node_names = {
@@ -197,5 +201,5 @@ def shortestPath(a, b):
     }
     return jsonify(result)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+#if __name__ == "__main__":
+ #   app.run(debug=True)

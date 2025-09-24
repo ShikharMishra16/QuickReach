@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { fetchShortData } from "./callServer";
-import Routes from "./routes";
+import Routes from "./Routes";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 const ZoomableImage = ({ src, alt }) => {
@@ -49,7 +49,8 @@ const App = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-gray-100 flex flex-col items-center p-8">
       <header className="text-4xl font-extrabold text-indigo-400 mb-10 tracking-wide drop-shadow-lg">
-        QuickReach <span className="text-indigo-300">- Shortest Path Finder</span>
+        QuickReach{" "}
+        <span className="text-indigo-300">- Shortest Path Finder</span>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-6xl mb-12">
@@ -62,7 +63,10 @@ const App = () => {
         className="bg-gray-800/70 shadow-2xl rounded-2xl p-8 w-full max-w-lg space-y-6 border border-gray-700 hover:border-indigo-500 transition"
       >
         <div>
-          <label htmlFor="source" className="block text-indigo-300 font-semibold mb-2">
+          <label
+            htmlFor="source"
+            className="block text-indigo-300 font-semibold mb-2"
+          >
             Source
           </label>
           <input
@@ -78,7 +82,10 @@ const App = () => {
         </div>
 
         <div>
-          <label htmlFor="destination" className="block text-indigo-300 font-semibold mb-2">
+          <label
+            htmlFor="destination"
+            className="block text-indigo-300 font-semibold mb-2"
+          >
             Destination
           </label>
           <input
