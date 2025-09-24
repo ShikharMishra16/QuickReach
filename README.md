@@ -7,7 +7,7 @@
 
 ---
 ## Dployment
-  [Deployed App](quickreachdeploy.vercel.app/)
+  [Deployed App](https://quickreachdeploy.vercel.app/)
 
 ---
 
