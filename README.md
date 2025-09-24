@@ -6,6 +6,10 @@
 [![Flask](https://img.shields.io/badge/Flask-2.3.3-lightgrey?logo=flask)](https://flask.palletsprojects.com/)
 
 ---
+## Dployment
+  quickreachdeploy.vercel.app/
+
+---
 
 ## Overview
 
