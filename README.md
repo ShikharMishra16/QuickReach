@@ -6,8 +6,14 @@
 [![Flask](https://img.shields.io/badge/Flask-2.3.3-lightgrey?logo=flask)](https://flask.palletsprojects.com/)
 
 ---
-## Deployment
-  [Deployed App](https://quickreachdeploy.vercel.app/)
+# Deployed Website
+  [click here for live website](https://quickreachdeploy.vercel.app/)
+
+
+# A Note on Performance
+When you **first** visit our live website, it might **seem slow or unresponsive**. This is because the backend is deployed on **Render's free tier**, which automatically causes the server to "spin down" after a **period of inactivity** to save resources.
+
+**Please be patient**, as the **first request** can take **30-50** seconds for the server to wake up. After this one-time startup, the application will be **quick, snappy, and fully responsive**.
 
 ---
 
@@ -42,6 +48,7 @@ It is designed for:
 - **Backend:** Python, Flask, Flask-CORS  
 - **Data Fetching:** Axios  
 - **Tools:** Vite, Git
+- **Deployment** frontend on vercel, backend on render
 
 ---
 
